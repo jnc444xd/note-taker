@@ -1,19 +1,22 @@
 const express = require('express');
-const api = require('./routes/index.js');
+const path = require('path');
+const api = require('./routes/index');
 
 const app = express();
 const PORT = 3001;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/api', api);
 
-app.get('/notes', (req,res) => {
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/pages/notes.html'))
 });
 
-app.get('*', (req,res) => {
-    res.sendFile(__dirname, '/public/pages/index.html')
+//Why can't index.html be inside pages?
+app.get('*', (req, res) => {
+    res.sendFile(__dirname, '/public/index.html')
 });
 
 app.listen(PORT, () => {
