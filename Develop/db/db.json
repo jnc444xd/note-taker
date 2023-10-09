@@ -1,24 +1,7 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "title": "Testing",
-        "text": "Test"
-    },
-    {
-        "title": "newtest",
-        "text": "hi"
-    },
-    {
-        "title": "ttt",
-        "text": "ttt",
-        "post-id": "ca747ad8-c8eb-4cbd-b3da-df15862b4017"
-    },
-    {
-        "title": "ttt",
-        "text": "ttt",
-        "post-id": "51d508d4-6fa2-4f79-abd5-e4a2131200d2"
+        "title": "hi",
+        "text": "hi",
+        "id": "867a46a5-b98b-4c5f-ba44-5f1ec98d024f"
     }
 ]
