@@ -23,12 +23,12 @@ notes.post('/', (req, res) => {
         body: newNote
     };
 
-    console.log(response);
     res.json(response);
 });
 
 notes.delete('/:id', (req, res) => {
     const checkID = req.params.id;
+    let deletedData = "";
 
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if (err) {
@@ -42,9 +42,23 @@ notes.delete('/:id', (req, res) => {
 
             const filteredData = filterInput(parsedData);
 
+            const findCheckID = (input) => {
+                return input.filter((item) => item.id === checkID)
+            };
+
+            deletedData = findCheckID(parsedData);
+
             writeToFile('./db/db.json', filteredData);
         };
-    })
+    });
+
+    const response = {
+        status: 'Success',
+        body: deletedData
+    };
+    // Why was this line required to run the promises in index.js
+    // .then to render notes after deleting one
+    res.json(response);
 });
 
 module.exports = notes;
