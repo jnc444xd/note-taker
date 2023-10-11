@@ -1,8 +1,7 @@
 const notes = require('express').Router();
-// Why don't I need to create instance of express here like in index file?
+const fs = require('fs');
 const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const { v4: uuidv4 } = require('uuid');
-const fs = require('fs');
 
 notes.get('/', (req, res) => {
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
@@ -49,16 +48,15 @@ notes.delete('/:id', (req, res) => {
             deletedData = findCheckID(parsedData);
 
             writeToFile('./db/db.json', filteredData);
+
+            const response = {
+                status: 'Success',
+                body: deletedData
+            };
+
+            res.json(response);
         };
     });
-
-    const response = {
-        status: 'Success',
-        body: deletedData
-    };
-    // Why was this line required to run the promises in index.js
-    // .then to render notes after deleting one
-    res.json(response);
 });
 
 module.exports = notes;
